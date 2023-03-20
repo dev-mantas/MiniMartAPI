@@ -6,7 +6,8 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 
-export const registerUser = async (req: Request, res: Response) => {
+
+export async function registerUser (req: Request, res: Response) {
     const { email, first_name, last_name } = req.body
     let hashedPassword;
     if(req.body.password) {

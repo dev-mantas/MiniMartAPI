@@ -19,6 +19,6 @@ export interface CurrentUserObject extends Omit<User, 'password'> {
 
 declare module 'express' {
     export interface Request {
-        currentUser: CurrentUserObject
+        currentUser?: CurrentUserObject
     }
 }

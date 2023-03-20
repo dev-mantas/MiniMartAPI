@@ -42,7 +42,7 @@ export const auth = (role: Roles) => {
             }
 
             const {password, ...currentUserObject} = user
-            req.currentUser = currentUserObject            
+            req.currentUser = currentUserObject         
             next()
         } catch(error: unknown) {
             next(error)
