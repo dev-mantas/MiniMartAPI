@@ -2,7 +2,7 @@ import mongoose, { Types } from 'mongoose'
 import type { User } from '../index'
 
 const userSchema = new mongoose.Schema<User>({
-    email: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
     first_name: {type: String, required: true},
     last_name: {type: String, required: true},
     password: {type: String, required: true},
