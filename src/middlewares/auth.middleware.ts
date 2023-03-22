@@ -2,11 +2,12 @@ import jwt, { Secret, JwtPayload } from 'jsonwebtoken'
 import * as dotenv from 'dotenv'
 import type { Roles, CurrentUserObject } from '../index'
 import { Request, Response, NextFunction, ErrorRequestHandler } from 'express'
+import {Types} from 'mongoose'
 import userSchema from '../schemas/user.schema'
 dotenv.config()
 
 export interface decodedToken extends JwtPayload {
-    userId: string
+    _id: string
 }
 
 export const auth = (role: Roles) => {
@@ -24,15 +25,14 @@ export const auth = (role: Roles) => {
 
             // decoded types might need some work
             const decoded = jwt.verify(token, secretKey)
+            console.log(decoded)
+            if (typeof decoded === 'string') {   
 
-            if (typeof decoded === 'string') {    
                 throw new Error(decoded)
             }
             
-            const decodedToken: decodedToken = {...decoded, userId: decoded._id }
-
-            const user = await userSchema.findOne({ _id: decoded._id }).select('-__v').lean()
-
+            const decodedToken: decodedToken = {...decoded, _id: decoded.userId }
+            const user = await userSchema.findOne({ _id: new Types.ObjectId(decodedToken._id) }).select('-__v').lean()
             if(!user) {
                 throw res.status(400).send('UNAUTHORIZED')
             }

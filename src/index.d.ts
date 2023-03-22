@@ -22,3 +22,13 @@ declare module 'express' {
         currentUser?: CurrentUserObject
     }
 }
+
+
+export interface Product {
+    name: string
+    category: string
+    metadata: metadata[]
+    
+}
+
+type metadata = string
