@@ -33,3 +33,10 @@ export async function createProduct(req: Request, res: Response) {
         throw res.status(400).send({message: 'ERROR_CREATING_PRODUCT'})
     }
 }
+
+
+export async function listPublicProducts(req: Request, res: Response) {
+    const products = await stripe.products.list({
+        limit: 25
+    })
+}

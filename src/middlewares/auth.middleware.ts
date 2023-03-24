@@ -13,6 +13,7 @@ export interface decodedToken extends JwtPayload {
 export const auth = (role: Roles) => {
     return async function (req: Request, res: Response, next: NextFunction) {
         try {
+            console.log(role)
             const authHeader = req.headers.authorization
             const bearer = 'Bearer '
 
@@ -37,7 +38,7 @@ export const auth = (role: Roles) => {
                 throw res.status(400).send('UNAUTHORIZED')
             }
 
-            if(!role.includes(user.role)) {
+            if(!role?.includes(user.role)) {
                 throw res.status(400).send('UNAUTHORIZED')
             }
 

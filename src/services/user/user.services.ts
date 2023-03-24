@@ -80,3 +80,9 @@ export async function loginUser (req: Request, res: Response) {
         throw res.status(400).send('LOGIN_FAILED')
     }
 }
+
+export async function getCurrentUser(req: Request, res: Response) {
+    const user = req.currentUser
+    if(!user) return res.status(400).send('UNAUTHORIZED')
+    return res.status(200).send(user)
+}
