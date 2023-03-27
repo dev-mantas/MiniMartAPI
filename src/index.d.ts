@@ -27,8 +27,15 @@ declare module 'express' {
 export interface Product {
     name: string
     category: string
-    metadata: metadata[]
-    
+    metadata: metadata[]   
+}
+
+export interface Order {
+    first_name: string
+    last_name: string
+    created: Date
+    productId: string
 }
 
 type metadata = string
+

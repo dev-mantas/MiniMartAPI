@@ -4,6 +4,7 @@ dotenv.config()
 export const connectDB = async () => {
     try {
         mongoose.set('strictQuery', true)
+        console.log('Attempting connection.')
         await mongoose.connect(String(process.env.MONGO_URI))
         console.log('Connection to database established...')
     } catch(error) {
