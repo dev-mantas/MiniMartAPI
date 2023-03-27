@@ -39,4 +39,6 @@ export async function listPublicProducts(req: Request, res: Response) {
     const products = await stripe.products.list({
         limit: 25
     })
+
+    return res.status(200).send(products)
 }
